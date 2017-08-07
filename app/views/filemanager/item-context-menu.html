@@ -1,0 +1,98 @@
+<div id="context-menu" class="dropdown clearfix animated fast fadeIn">
+    <ul class="dropdown-menu dropdown-right-click" role="menu" aria-labelledby="dropdownMenu" ng-show="temps.length">
+
+        <li ng-show="singleSelection() && singleSelection().isFolder()">
+            <a href="" tabindex="-1" ng-click="smartClick(singleSelection())">
+                <i class="glyphicon glyphicon-folder-open"></i> {{'file_manager.open' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.pickCallback && singleSelection() && singleSelection().isSelectable()">
+            <a href="" tabindex="-1" ng-click="config.pickCallback(singleSelection().model)">
+                <i class="glyphicon glyphicon-hand-up"></i> {{'file_manager.select_this' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.download && !selectionHas('dir') && singleSelection()">
+            <a href="" tabindex="-1" ng-click="download()">
+                <i class="glyphicon glyphicon-cloud-download"></i> {{'file_manager.download' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.downloadMultiple && !selectionHas('dir') && !singleSelection()">
+            <a href="" tabindex="-1" ng-click="download()">
+                <i class="glyphicon glyphicon-cloud-download"></i> {{'file_manager.download_as_zip' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.preview && singleSelection().isImage() && singleSelection()">
+            <a href="" tabindex="-1" ng-click="openImagePreview()">
+                <i class="glyphicon glyphicon-picture"></i> {{'file_manager.view_item' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.rename && singleSelection()">
+            <a href="" tabindex="-1" ng-click="modal('rename')">
+                <i class="glyphicon glyphicon-edit"></i> {{'file_manager.rename' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.move">
+            <a href="" tabindex="-1" ng-click="modalWithPathSelector('move')">
+                <i class="glyphicon glyphicon-arrow-right"></i> {{'file_manager.move' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.copy && !selectionHas('dir')">
+            <a href="" tabindex="-1" ng-click="modalWithPathSelector('copy')">
+                <i class="glyphicon glyphicon-log-out"></i> {{'file_manager.copy' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.edit && singleSelection() && singleSelection().isEditable()">
+            <a href="" tabindex="-1" ng-click="openEditItem()">
+                <i class="glyphicon glyphicon-pencil"></i> {{'file_manager.edit' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.changePermissions">
+            <a href="" tabindex="-1" ng-click="modal('changepermissions')">
+                <i class="glyphicon glyphicon-lock"></i> {{'file_manager.permissions' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.compress && (!singleSelection() || selectionHas('dir'))">
+            <a href="" tabindex="-1" ng-click="modal('compress')">
+                <i class="glyphicon glyphicon-compressed"></i> {{'file_manager.compress' | translate}}
+            </a>
+        </li>
+
+        <li ng-show="config.allowedActions.extract && singleSelection() && singleSelection().isExtractable()">
+            <a href="" tabindex="-1" ng-click="modal('extract')">
+                <i class="glyphicon glyphicon-export"></i> {{'file_manager.extract' | translate}}
+            </a>
+        </li>
+
+        <li class="divider" ng-show="config.allowedActions.remove"></li>
+        
+        <li ng-show="config.allowedActions.remove">
+            <a href="" tabindex="-1" ng-click="modal('remove')">
+                <i class="glyphicon glyphicon-trash"></i> {{'file_manager.remove' | translate}}
+            </a>
+        </li>
+
+    </ul>
+
+    <ul class="dropdown-menu dropdown-right-click" role="menu" aria-labelledby="dropdownMenu" ng-show="!temps.length">
+        <li ng-show="config.allowedActions.createFolder">
+            <a href="" tabindex="-1" ng-click="modal('newfolder') && prepareNewFolder()">
+                <i class="glyphicon glyphicon-plus"></i> {{'file_manager.new_folder' | translate}}
+            </a>
+        </li>
+        <li ng-show="config.allowedActions.upload">
+            <a href="" tabindex="-1" ng-click="modal('uploadfile')">
+                <i class="glyphicon glyphicon-cloud-upload"></i> {{'file_manager.upload_files' | translate}}
+            </a>
+        </li>
+    </ul>
+</div>

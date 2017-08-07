@@ -1,0 +1,28 @@
+<section class="page hope-curriculums-view" ng-init="init()" ng-cloak>
+    <div class="pageheader">
+        <h2 class="ng-binding">{{ curriculum.title[currentLang] }}&nbsp;({{ curriculum.abbreviationTitle }})</h2>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li> <a><i class="fa fa-home"></i>{{ 'Menu.DASHBOARD' | translate }}</a> </li>
+                <li> <a>{{ 'Menu.CURRICULUM' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.manage">{{ 'Menu.MANAGE_CURRICULUMS' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.view({curriculumId:{{ $stateParams.curriculumId }}})">{{ curriculum.abbreviationTitle }}</a></li>
+                <li ng-if="$stateParams.lessonId"><a ui-sref="admin.curriculums.chapterEditLesson({curriculumId:{{ $stateParams.curriculumId }}, chapterId:{{ $stateParams.chapterId }}, lessonId:{{ $stateParams.lessonId }} })">{{lesson.title[currentLang]}}</a>
+                <li ng-if="$stateParams.activityId"><a>{{activity.title[currentLang]}}</a></li>
+                <li ng-if="!$stateParams.activityId"><a>{{ 'Menu.LESSON_FILES' | translate }}</a></li>
+                <li ng-if="$stateParams.activityId"><a>{{ 'Menu.ACTIVITY_FILES' | translate }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pagecontent">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+            <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+        </uib-alert>
+        <div ng-repeat="lesson in lessons.all() track by $index" ng-if="!$stateParams.activityId">
+            <angular-filemanager base-folder="'lessons/' + lesson.id + '/'"></angular-filemanager>
+        </div>
+        <div ng-repeat="activity in activities.all() track by $index" ng-if="$stateParams.activityId">
+            <angular-filemanager base-folder="'activities/' + activity.id + '/'"></angular-filemanager>
+        </div>
+    </div>
+</section>

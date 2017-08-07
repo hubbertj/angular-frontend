@@ -1,0 +1,13 @@
+#file manager
+.DS_Store
+
+#npm generated files
+node_modules/
+
+#bower generated files
+bower_components/
+
+#logs
+npm-debug.log
+
+

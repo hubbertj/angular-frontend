@@ -1,0 +1,23 @@
+<section class="page hope-curriculums-view" ng-init="init()" ng-cloak>
+    <div class="pageheader">
+        <h2 class="ng-binding">{{ curriculum.title[currentLang] }}&nbsp;({{ curriculum.abbreviationTitle }})</h2>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li> <a><i class="fa fa-home"></i>{{ 'Menu.DASHBOARD' | translate }}</a> </li>
+                <li> <a>{{ 'Menu.CURRICULUM' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.manage">{{ 'Menu.MANAGE_CURRICULUMS' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.view({curriculumId:{{ $stateParams.curriculumId }}})">{{ curriculum.abbreviationTitle }}</a></li>
+                <li> <a ui-sref="admin.curriculums.editChapter({curriculumId:{{ $stateParams.curriculumId }}, chapterId:{{ $stateParams.chapterId }}})">{{ chapter.title[currentLang] }}</a></li>
+                <li><a>Assessment&nbsp;Files</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pagecontent">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+            <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+        </uib-alert>
+        <div ng-repeat="assessment in assessments.all() track by $index">
+            <angular-filemanager base-folder="'assessments/' + assessment.id + '/'"></angular-filemanager>
+        </div>
+    </div>
+</section>

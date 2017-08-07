@@ -1,0 +1,24 @@
+<section class="page page-core page-login hope-forgot" ng-init="init()">
+    <div class="text-center">
+        <h3 class="text-light text-white">OPERATION HOPE</h3></div>
+    <div class="container w-420 p-15 bg-white mt-40 text-center">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+            <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+        </uib-alert>
+        <h2 class="text-light text-greensea">Forgot Password?</h2>
+        <form name="passwordResetForm" class="form-validation mt-20" ng-submit="onSubmit()" novalidate>
+            <p class="help-block text-left">
+                Enter your e-mail address below to reset your password.
+            </p>
+            <div class="form-group">
+                <input type="email" class="form-control underline-input" placeholder="Email" ng-model="email" required>
+            </div>
+            <div class="bg-slategray lt wrap-reset mt-40 text-left">
+                <p class="m-0">
+                    <button class="btn btn-greensea b-0 text-uppercase pull-right" ng-disabled="passwordResetForm.$invalid">Submit</button>
+                    <a ui-sref="core.login" class="btn btn-lightred b-0 text-uppercase">Back</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</section>

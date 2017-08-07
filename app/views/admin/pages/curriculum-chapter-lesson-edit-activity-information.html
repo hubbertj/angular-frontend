@@ -1,0 +1,162 @@
+<section class="page hope-curriculums-chapter-lesson-edit-activity-information" ng-init="init()" ng-cloak>
+    <div class="pageheader">
+        <h2>({{ curriculum.abbreviationTitle }}&nbsp;&#45;&nbsp;{{ curriculum.title[currentLang] }})&nbsp;{{ 'Menu.EDIT_ACTIVITY' | translate }}</h2>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li> <a><i class="fa fa-home"></i>&nbsp;{{ 'Menu.DASHBOARD' | translate }}</a> </li>
+                <li> <a>Curriculum</a> </li>
+                <li> <a ui-sref="admin.curriculums.manage">{{ 'Menu.MANAGE_CURRICULUM' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.view({curriculumId:{{ $stateParams.curriculumId }}})">{{ curriculum.abbreviationTitle }}</a></li>
+                <li> <a ui-sref="admin.curriculums.editChapter({curriculumId:{{ $stateParams.curriculumId }}, chapterId:{{ $stateParams.chapterId }} })">{{chapter.title[currentLang]}}</a></li>
+                <li><a ui-sref="admin.curriculums.chapterEditLesson({curriculumId:{{ $stateParams.curriculumId }}, chapterId:{{ $stateParams.chapterId }}, lessonId:{{ $stateParams.lessonId }} })">{{lesson.title[currentLang]}}</a>
+                </li>
+                <li><a>{{ pageTitle }}</a>
+                </li>
+                <li><a>{{ 'Menu.EDIT_ACTIVITY' | translate }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pagecontent">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+            <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+        </uib-alert>
+        <div class="row">
+            <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen06">
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="">{{ 'Page.ACTIVTY_DETAILS' | translate }}</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                                <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                                    <li>
+                                        <a href="" tile-control-toggle="">
+                                            <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-fullscreen="" ng-click="isFullscreen06 = !isFullscreen06">
+                                            <i class="fa fa-expand" name="expand"></i>&nbsp;{{ 'Page.FULLSCREEN' | translate }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-lightbox="">
+                                            <i class="fa fa-magnet" name="magnet"></i>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body">
+                        <uib-alert ng-repeat="alert in alertsActivity" type="{{alert.type}}" close="closeActivityAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+                            <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+                        </uib-alert>
+                        <div class="row">
+                            <form name="addActivityForm" id="add-activity-form" ng-submit="onUpdate()" validate>
+                                <div class="form-group col-xs-12">
+                                    <label for="chapter-title" class="col-xs-2 col-form-label">{{ 'Page.NAME' | translate }}</label>
+                                    <div class="col-xs-10">
+                                        <language-support class="language-support" title="Name" var-class="form-control" var-model="activity.title" var-name="activityTitle" var-type="text" var-id="activity-title">
+                                        </language-support>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label for="chapter-description" class="col-xs-2 col-form-label">{{ 'Page.SHORT_DESCRIPTON' | translate }}.</label>
+                                    <div class="col-xs-10">
+                                        <language-support class="language-support" title="Description" var-class="form-control" var-model="activity.description" var-name="activityDescription" var-type="text" var-id="activity-description">
+                                        </language-support>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label for="chapter.estimatedTime" class="col-xs-2 col-form-label">{{ 'Page.TIME_NEEDED' | translate }}</label>
+                                    <div class="col-xs-6 col-sm-4">
+                                        <div class="input-group">
+                                            <input type="number" name="activityEstimatedTime" class="form-control" ng-model="activity.estimatedTime" id="activity-estimatedTime" required>
+                                            <div class="input-group-addon">{{ 'Page.MINUTES' | translate }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-6 text-right">
+                                        <div class="form-inline">
+                                            <label class="checkbox checkbox-custom">
+                                                <input type="checkbox" name="activityisEnabled" ng-model="activity.isEnabled" id="activity-isEnabled"><i></i>
+                                            </label>
+                                            {{ 'Page.ENABLED' | translate }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label for="chapter.estimatedTime" class="col-xs-2 col-form-label">{{ 'Page.ORDINAL' | translate }}</label>
+                                    <div class="col-xs-6 col-sm-4">
+                                        <input type="number" name="activityOrdinal" class="form-control" ng-model="activity.ordinal" id="activity-ordinal" required>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-6 text-right pull-right">
+                                        <div class="form-inline">
+                                            <label class="checkbox checkbox-custom">
+                                                <input type="checkbox" ng-model="activity.requiresLessonCompleted" name="activityRequired" id="activity-isEnabled"><i></i>
+                                            </label>
+                                            {{ 'Page.REQUIRED_COMPLETION' | translate }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <button class="md-raised md-primary md-button md-ink-ripple pull-right" ng-disabled="addActivityForm.$invalid">{{ 'Page.SAVE' | translate }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+                <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen06">
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="">{{ 'Page.COVER_IMAGE' | translate }}</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                                <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                                    <li>
+                                        <a href="" tile-control-toggle="">
+                                            <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-lightbox="">
+                                            <i class="fa fa-magnet" name="magnet"></i>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body ">
+                        <div class="row ">
+                            <div class="col-sm-6 col-xs-12 ">
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-6 text-center ">
+                                        <img ng-show="cover.image" class="cover-image" src="{{cover.image}}"/>
+                                        <img ng-if="!cover.image" class="cover-image" src="{{activity.thumbnailUri}}" alt="COVER_IMAGE "/>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-sm-6 text-center ">
+                                        <label class="pull-left">&nbsp;</label>
+                                        <label class="fileContainer md-raised md-primary md-button md-ink-ripple "><span>Upload File</span>
+                                            <input type="file" fileread="cover.image" readchange="onChange" readmodel="cover" nv-file-select="onSelectFile()" uploader="cover.uploader" />
+                                        </label>
+                                        <small>1920x768&nbsp;(300dpi)&nbsp;.PNG&nbsp;|&nbsp;.JPEG</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <button class="md-raised md-warn md-button md-ink-ripple pull-right" ng-show="cover.uploader.queue.length > 0 || activity.thumbnailUri" type="button" ng-click="onRemove('cover', cover)">REMOVE</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

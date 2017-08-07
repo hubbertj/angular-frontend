@@ -1,0 +1,52 @@
+<div id="sidebar-wrap" ng-init="initNavigation()">
+    <uib-accordion close-others="oneAtTime" slimscroll="{height: '100%'}">
+        <uib-accordion-group is-open="status.isFirstOpen">
+            <uib-accordion-heading>
+                Navigation <i class="pull-right fa" ng-class="{'fa-angle-up': status.isFirstOpen, 'fa-angle-down': !status.isFirstOpen}"></i>
+            </uib-accordion-heading>
+            <ul id="navigation" nav-collapse ripple>
+                <!-- DASHBOARD -->
+                <li ui-sref-active="active">
+                   <!--  <a ui-sref="admin.dashboard">
+                        <fa name="dashboard"></fa> <span>{{ 'Menu.DASHBOARD' | translate }}</span>
+                    </a> -->
+                    <!-- <a>
+                        <fa name="dashboard"></fa> <span>{{ 'Menu.DASHBOARD' | translate }}</span>
+                    </a> -->
+                </li>
+                <!-- CURRICULUMS -->
+                <li ui-sref-active="active" ng-class="{'open':$state.includes('admin.curriculums')}">
+                    <a ui-sref="admin.curriculums">
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i> <span>{{ 'Menu.CURRICULUMS' | translate }}</span></a>
+                    <ul>
+                        <li ui-sref-active="active">
+                            <a ui-sref="admin.curriculums.manage">
+                                <fa name="caret-right"></fa> {{ 'Menu.sub_menu.MANAGE_CURRICULUMS' | translate }}</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- COMMUNITY_VIDEOS -->
+                <li ui-sref-active="active">
+                    <a ui-sref="admin.videos.manage">
+                        <i class="fa fa-youtube-play" aria-hidden="true"></i> <span>{{ 'Menu.COMMUNITY_VIDEOS' | translate }}</span></a>
+                </li>
+                <!-- ADMIN_USERS -->
+                <li ui-sref-active="active" ng-class="{'open':$state.includes('admin.admin_users')}">
+                    <a ui-sref="admin.admin_users">
+                        <i class="fa fa-users" aria-hidden="true"></i> <span>{{ 'Menu.ADMIN_USERS' | translate }}</span>
+                    </a>
+                    <ul>
+                        <li ui-sref-active="active">
+                            <a ui-sref="admin.users.manage">
+                                <fa name="caret-right"></fa> {{ 'Menu.sub_menu.MANAGE_USERS' | translate }}</a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="admin.users.addUser">
+                                <fa name="caret-right"></fa> {{ 'Menu.sub_menu.ADD_NEW_USER' | translate }}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </uib-accordion-group>
+    </uib-accordion>
+</div>

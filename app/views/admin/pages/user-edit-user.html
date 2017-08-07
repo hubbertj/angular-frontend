@@ -1,0 +1,95 @@
+<section class="page page-dashboard hope-add-new-user" ng-init="init()">
+    <div class="pageheader" ng-cloak>
+        <h2 class="ng-binding">Add Admin User <span class="ng-binding"></span></h2>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li> <a><i class="fa fa-home"></i> Dashboard</a> </li>
+                <li> <a ui-sref="admin.users.manage">Manage Admin Users</a> </li>
+                <li> <a ui-sref="admin.users.editUser({userId:{{ $stateParams.userId }}})">{{loadedUser.firstName}}&nbsp;{{loadedUser.lastName}}</a> </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pagecontent" ng-cloak>
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+            <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+        </uib-alert>
+        <div class="row">
+            <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen06">
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="">{{ 'Page.USER_DETAILS' | translate }}</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                                <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                                    <li>
+                                        <a href="" tile-control-toggle="">
+                                            <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-fullscreen="" ng-click="isFullscreen06 = !isFullscreen06">
+                                            <i class="fa fa-expand" name="expand"></i>&nbsp;{{ 'Page.FULLSCREEN' | translate }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-lightbox="">
+                                            <i class="fa fa-magnet" name="magnet"></i>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body">
+                        <div class="row">
+                            <form name="addAdminUserform" id="add-admin-user-form" ng-submit="onUpdate()" validate>
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label class="col-xs-2 col-md-4">{{ 'Page.FIRSTNAME' | translate }}</label>
+                                    <div class="col-xs-10 col-md-8">
+                                        <input class="form-control" type="text" name="firstName" id="user-firstname" ng-model="user.firstName" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label class="col-xs-2 col-md-4">{{ 'Page.LASTNAME' | translate }}</label>
+                                    <div class="col-xs-10 col-md-8">
+                                        <input class="form-control" type="text" name="lastName" id="user-lastname" ng-model="user.lastName" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-2 ">{{ 'Page.EMAIL' | translate }}</label>
+                                    <div class="col-xs-10 ">
+                                        <input class="form-control" type="email" name="email" id="user-email" ng-model="user.email" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-2 ">{{ 'Page.USERNAME' | translate }}</label>
+                                    <div class="col-xs-10 ">
+                                        <input class="form-control" type="text" name="username" id="user-username" ng-model="user.username" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label class="col-xs-2 col-md-4">{{ 'Page.BIRTH_DATE' | translate }}</label>
+                                    <div class="col-xs-10 col-md-8">
+                                        <input class="form-control" type="date" name="birthDate" id="user-birthDate" ng-model="user.birthDate" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label class="col-xs-2">{{ 'Page.GENDER' | translate }}</label>
+                                    <div class="col-xs-10">
+                                        <select class="form-control" name="gender" id="user-gender" ng-model="user.gender" ng-options="gender as gender.name for gender in genders.all() track by gender.id"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <button class="md-raised md-warn md-button md-ink-ripple" type="button" ng-click="onPasswordReset()">{{ 'Page.RESET_PASSWORD' | translate }}</button>
+                                    <button class="md-raised md-primary md-button md-ink-ripple pull-right" ng-disabled="addAdminUserform.$invalid">{{ 'Page.UPDATE' | translate }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

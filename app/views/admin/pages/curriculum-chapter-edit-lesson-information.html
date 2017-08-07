@@ -1,0 +1,245 @@
+<section class="page hope-curriculums-edit-lesson-information" ng-init="init()" ng-cloak>
+    <div class="pageheader">
+        <h2>({{ curriculum.abbreviationTitle }})&nbsp;{{ 'Menu.EDIT_LESSON' | translate }}</h2>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li> <a><i class="fa fa-home"></i>{{ 'Menu.DASHBOARD' | translate }}</a> </li>
+                <li> <a>{{ 'Menu.CURRICULUM' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.manage">{{ 'Menu.MANAGE_CURRICULUM' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.view({curriculumId:{{ curriculum.id }}})">{{ curriculum.abbreviationTitle }}</a></li>
+                <li> <a ui-sref="admin.curriculums.editChapter({curriculumId:{{ $stateParams.curriculumId }}, chapterId:{{ $stateParams.chapterId }} })">{{chapter.title[currentLang]}}</a></li>
+                <li><a ui-sref="admin.curriculums.chapterEditLesson({curriculumId:{{ $stateParams.curriculumId }}, chapterId:{{ $stateParams.chapterId }}, lessonId:{{ $stateParams.lessonId }} })">{{ pageTitle }}</a>
+                </li>
+                <li><a>{{ 'Menu.EDIT_LESSON' | translate }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pagecontent" ng-cloak>
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+            <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+        </uib-alert>
+        <div class="row">
+            <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen06">
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="">{{ 'Page.LESSON_DETAILS' | translate }}</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                                <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                                    <li>
+                                        <a href="" tile-control-toggle="">
+                                            <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-fullscreen="" ng-click="isFullscreen06 = !isFullscreen06">
+                                            <i class="fa fa-expand" name="expand"></i>&nbsp;{{ 'Page.FULLSCREEN' | translate }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-lightbox="">
+                                            <i class="fa fa-magnet" name="magnet"></i>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body">
+                        <uib-alert ng-repeat="alert in alertsLesson" type="{{alert.type}}" close="closeLessonAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+                            <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+                        </uib-alert>
+                        <div class="row">
+                            <form name="addLessonForm" id="add-lesson-form" ng-submit="onUpdate()" validate>
+                                <div class="form-group col-xs-12">
+                                    <label for="lesson-title" class="col-xs-2 col-form-label">{{ 'Page.NAME' | translate }}</label>
+                                    <div class="col-xs-10">
+                                        <language-support class="language-support" title="Name" var-class="form-control" var-model="lesson.title" var-name="title" var-type="text" var-id="lesson-title">
+                                        </language-support>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label for="lesson-subtitle" class="col-xs-2 col-form-label">{{ 'Page.SUBTITLE' | translate }}</label>
+                                    <div class="col-xs-10">
+                                        <language-support class="language-support" title="Subtitle" var-class="form-control" var-model="lesson.subtitle" var-name="subtitle" var-type="text" var-id="lesson-subtitle">
+                                        </language-support>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label for="lesson-description" class="col-xs-2 col-form-label">{{ 'Page.SHORT_DESCRIPTON' | translate }}.</label>
+                                    <div class="col-xs-10">
+                                        <language-support class="language-support" title="Description" var-class="form-control" var-model="lesson.description" var-name="title" var-type="text" var-id="lesson-description">
+                                        </language-support>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label for="lesson-communityUrl" class="col-xs-2 col-form-label">{{ 'Page.COMMUNITY_URL' | translate }}</label>
+                                    <div class="col-xs-10">
+                                        <input type="url" class="form-control" ng-model="lesson.communityUrl" id="lesson-communityUrl" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label for="lesson-estimatedTime" class="col-xs-2 col-form-label">{{ 'Page.TIME_NEEDED' | translate }}</label>
+                                    <div class="col-xs-6 col-sm-4">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" ng-model="lesson.estimatedTime" id="lesson-estimatedTime" required>
+                                            <div class="input-group-addon">{{ 'Page.MINUTES' | translate }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-6 text-right">
+                                        <div class="form-inline">
+                                            {{ 'Page.ENABLED' | translate }}
+                                            <label class="checkbox checkbox-custom">
+                                                <input type="checkbox" ng-model="lesson.isPublished" name="isPublished" id="lesson-isPublished"><i></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <button class="md-raised md-primary md-button md-ink-ripple pull-right" ng-disabled="addLessonForm.$invalid">{{ 'Page.SAVE' | translate }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen06">
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="">{{ 'Page.ICON' | translate }}</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                                <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                                    <li>
+                                        <a href="" tile-control-toggle="">
+                                            <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-lightbox="">
+                                            <i class="fa fa-magnet" name="magnet"></i>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body ">
+                        <div class="row ">
+                            <div class="col-sm-6 col-xs-12 ">
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-6 text-center ">
+                                        <img ng-show="icon.image" class="icon-image" src="{{icon.image}}"/>
+                                        <img ng-if="!icon.image" class="icon-image" src="{{lesson.iconUri}}" alt="ICON_IMAGE "/>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-sm-6 text-center ">
+                                        <label class="pull-left">&nbsp;</label>
+                                        <label class="fileContainer md-raised md-primary md-button md-ink-ripple "><span>Upload File</span>
+                                            <input type="file" fileread="icon.image" readchange="onChange" readmodel="icon" nv-file-select="onSelectFile()" uploader="icon.uploader" />
+                                        </label>
+                                        <small>1920x768&nbsp;(300dpi)&nbsp;.PNG&nbsp;|&nbsp;.JPEG</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <button class="md-raised md-warn md-button md-ink-ripple pull-right" ng-show="icon.uploader.queue.length > 0 || lesson.iconUri" type="button" ng-click="onRemove('icon', icon)">REMOVE</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-12">
+                <section class="tile " fullscreen="isFullscreen06 ">
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm ">
+                        <h1 class=" ">{{ 'Page.BADGE' | translate }}</h1>
+                        <ul class="controls ">
+                            <li class="dropdown " uib-dropdown=" " on-toggle="toggled(open) ">
+                                <a href=" " uib-dropdown-toggle=" " class="dropdown-toggle settings " aria-haspopup="true " aria-expanded="false "><i class="fa fa-cog "></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp " style=" ">
+                                    <li>
+                                        <a href=" " tile-control-toggle=" ">
+                                            <span class="minimize "><i class="fa fa-angle-down " name="angle-down "></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand "><i class="fa fa-angle-up " name="angle-up "></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href=" " tile-control-lightbox=" ">
+                                            <i class="fa fa-magnet " name="magnet "></i>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body ">
+                        <div class="row ">
+                            <div class="col-sm-6 col-xs-12 ">
+                                <div class="row ">
+                                    <div class="form-group col-xs-12 col-sm-6 text-center ">
+                                        <img ng-show="badge.image" class="badge-image" src="{{badge.image}}"/>
+                                        <img ng-if="!badge.image" class="badge-image" src="{{achievement.contentUri}}" alt="BADGE_IMAGE "/>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-sm-6 text-center ">
+                                        <label class="fileContainer md-raised md-primary md-button md-ink-ripple ""><span>Upload File</span>
+                                            <input type="file" fileread="badge.image" readchange="onChange" readmodel="badge" nv-file-select="onSelectFile()" uploader="badge.uploader" />
+                                        </label>
+                                        <small>1920x768&nbsp;(300dpi)&nbsp;.PNG&nbsp;|&nbsp;.JPEG</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <button class="md-raised md-warn md-button md-ink-ripple pull-right" ng-show="badge.uploader.queue.length > 0 || achievement.contentUri" type="button" ng-click="onRemove('achievement', badge)">REMOVE</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen06">
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="">{{ 'Page.LANGUAGE' | translate }}</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                                <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                                    <li>
+                                        <a href="" tile-control-toggle="">
+                                            <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-lightbox="">
+                                            <i class="fa fa-magnet" name="magnet"></i>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body">
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-8">
+                                <select multiple class="form-control" ng-model="selectedFiles" ng-options="file as ('Name: ' + file.name + ' Size: ' + file.size + ' Type: ' + file.type) for file in loadedFiles.all() track by file.name">
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <button class="btn btn-lightred" ng-show="selectedFiles.length > 0" ng-click="onRemoveFile()">Delete</button>
+                                <button class="btn btn-default"  ng-show="selectedFiles.length > 0" ng-click="onDownloadFiles()">Download</button>
+                                <input ui-jq="filestyle" type="file" class="filestyle" nv-file-select="onSelectFile()" uploader="uploader" ui-options="{ buttonText: '+ LANGUAGE FILE ', iconName: ''}" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

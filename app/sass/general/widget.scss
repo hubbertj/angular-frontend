@@ -1,0 +1,45 @@
+.widget {}
+
+.widget-lesson.tile {
+    min-height: 250px;
+    background-color: $content-color;
+    .inner-container {
+        background-color: white;
+    }
+}
+
+.video-widget {
+    min-height: 200px;
+    background-color: transparent;
+}
+
+.widget-details {
+    width: 305px;
+    section.tile {
+        min-height: 295px;
+    }
+}
+
+.chapter-section,
+.video-section,
+.lesson-section {
+    width: 260px;
+    min-height: 560px;
+    // overflow-y: auto;
+    overflow-x: hidden;
+    .description {
+        max-height: 100px;
+        overflow: auto;
+    }
+}
+
+.widget-file-manager {
+    section.tile {
+        height: 295px;
+        overflow: hidden;
+        div.tile-body {
+            max-height: 250px;
+            overflow: auto;
+        }
+    }
+}

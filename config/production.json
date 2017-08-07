@@ -1,0 +1,17 @@
+{
+  "name": "production",
+  "apiEndpoint": "http://operation-hope-api-staging-ELB-1597586358.us-west-1.elb.amazonaws.com/api",
+  "s3Bucket": "operation-hope-content",
+  "s3BucketUpload": "operation-hope-upload",
+  "aws": {
+    "accessKeyId": "AKIAIT6GF74R7FQPML5A",
+    "secretAccessKey": "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",
+    "region": "us-west-1"
+  },
+  "awsMaster": {
+    "accessKeyId": "AKIAI6XFBXJPJCNG2PFQ",
+    "secretAccessKey": "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",
+    "region": "us-west-1",
+    "bucket": "admin.operationhopeapps.org"
+  }
+}

@@ -1,0 +1,136 @@
+@import "../general/tools";
+section.hope-curriculums,
+section.hope-curriculums-manage,
+section.hope-curriculums-view {}
+
+section.hope-curriculums {}
+
+section.hope-curriculums-manage {}
+
+section.hope-curriculums-view {
+    div.chapter-container {
+        padding: 5px;
+    }
+    img.chapter-img {
+        height: 200px;
+        width: 200px;
+    }
+    .carousel-demo {
+        height: 300px;
+    }
+    .bgimage {
+        text-align: right;
+        color: white;
+        background-size: cover;
+        height: 100%;
+        background-position: center center;
+    }
+    ul[rn-carousel] {
+        height: 290px;
+        margin: 0 auto;
+    }
+    .carousel5 li {
+        width: 100%;
+        height: 100%;
+        font-size: 30px;
+        background-color: #ccc;
+    }
+    .carousel-demo {
+        margin-top: 20px;
+        display: inline-block;
+        text-align: center;
+    }
+    .carousel-demo-fullscreen {
+        width: 100%;
+        height: 100%;
+    }
+    .carousel-demo-fullscreen ul[rn-carousel] {
+        width: 100%;
+        height: 100%;
+    }
+    input.tiny {
+        width: 50px;
+        text-align: center;
+    }
+    .carousel-demo ul[rn-carousel-transition="hexagon"] {
+        margin-left: 100px;
+    }
+    .custom-indicator span {
+        transition: all 0.3s ease-in;
+    }
+    .custom-indicator span.active {
+        color: lightgray !important;
+    }
+}
+
+section.hope-curriculums-edit-chapter {
+    i.icon-intro {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background: lightgray;
+        padding: 5px;
+        color: white;
+    }
+    @media (max-width: 767px) {
+        span.section-title.assessment-title {
+            top: inherit;
+        }
+    }
+}
+
+section.hope-curriculums-chapter-add-lesson {
+    div.bootstrap-filestyle {
+        // top: 7px;
+        input[type="text"] {
+            visibility: hidden;
+        }
+    }
+}
+
+section.hope-curriculums-edit-hero {
+    img.hero-image {
+        width: 100%;
+    }
+}
+
+section.hope-curriculums-add-chapter {
+    img.badge-image,
+    img.cover-image {
+        width: 100%;
+    }
+}
+
+section.hope-curriculums-chapter-add-lesson {
+    img.badge-image,
+    img.icon-image {
+        width: 100%;
+    }
+}
+
+section.hope-curriculums-edit-lesson-information {
+    div.bootstrap-filestyle {
+        label {
+            float: right;
+        }
+        input[type="text"] {
+            display: none;
+        }
+    }
+    img.badge-image,
+    img.icon-image {
+        width: 100%;
+    }
+}
+
+section.hope-curriculums-chapter-lesson-edit-activity-information{
+    img.cover-image {
+        width: 100%;
+    }
+}
+
+section.hope-curriculums-edit-achievement, section.hope-curriculums-chapter-add-activity{
+    img.cover-image {
+        width: 100%;
+    }
+}

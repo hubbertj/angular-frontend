@@ -1,0 +1,116 @@
+<section class="page hope-community-videos" ng-init="init()">
+    <div class="pageheader">
+        <h2 class="ng-binding">Manage Community Videos <span class="ng-binding"></span></h2>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li> <a><i class="fa fa-home"></i> Dashboard</a> </li>
+                <li> <a ui-sref="admin.manage_community_videos">Manage Community Videos</a> </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pagecontent">
+        <div class="row">
+            <div class="content-section col-xs-12">
+                <h4 class="underline hope-section-header">
+                    <div class="row">
+                        <span class="col-md-4">Videos Requiring Review</span>
+                    </div> 
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3" ng-repeat="video in video_review.all() track by $index">
+                <section class="tile">
+                    <uib-tabset class="text-nowrap video-tabset">
+                        <uib-tab index="0" heading="In Review" active="true" class=""></uib-tab>
+                        <uib-tab index="1" heading="Denied" disable="true" class=""></uib-tab>
+                        <uib-tab index="2" heading="Approved" disable="true" class=""></uib-tab>
+                    </uib-tabset>
+                    <div class="tile-body">
+                        <anguvideo ng-model="video.contentURI" width="100%" height="200"></anguvideo>
+                    </div>
+                </section>
+                <div class="col-md-12">
+                    <div>{{video.title}}</div>
+                    <div>by:&nbsp;{{video.by}}</div>
+                    <div>Submitted:&nbsp;{{video.createdDate | date:'MM/dd/yyyy' }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="content-section col-xs-12">
+                <h4 class="underline hope-section-header">
+                    <div class="row">
+                        <span class="col-md-6 section-title">Approved Videos</span>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="Search" class="form-control"/>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option selected>Sort by Chapter</option>
+                             </select>
+                        </div>
+                    </div>   
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" ng-repeat="video in video_approved.all() track by $index">
+            <section class="tile">
+                <uib-tabset class="text-nowrap video-tabset">
+                    <uib-tab index="0" heading="In Review" disable="true" class=""></uib-tab>
+                    <uib-tab index="1" heading="Denied" disable="true" class=""></uib-tab>
+                    <uib-tab index="2" heading="Approved" active="true" class=""></uib-tab>
+                </uib-tabset>
+                <div class="tile-body">
+                    <anguvideo ng-model="video.contentURI" width="100%" height="200"></anguvideo>
+                </div>
+            </section>
+            <div class="col-md-12">
+                <div>{{video.title}}</div>
+                <div>by:&nbsp;{{video.by}}</div>
+                <div>Submitted:&nbsp;{{video.createdDate | date:'MM/dd/yyyy' }}</div>
+                <div>Chapters:&nbsp;{{video.chapters}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="content-section col-xs-12">
+            <h4 class="underline hope-section-header">
+                    <div class="row">
+                        <span class="col-md-6 section-title">Denied Videos</span>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="Search" class="form-control"/>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option selected>Sort by Chapter</option>
+                             </select>
+                        </div>
+                    </div> 
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" ng-repeat="video in video_denied.all() track by $index">
+            <section class="tile">
+                <uib-tabset class="text-nowrap video-tabset">
+                    <uib-tab index="0" heading="In Review" disable="true" class=""></uib-tab>
+                    <uib-tab index="1" heading="Denied" active="true" class=""></uib-tab>
+                    <uib-tab index="2" heading="Approved" disable="true" class=""></uib-tab>
+                </uib-tabset>
+                <div class="tile-body">
+                    <anguvideo ng-model="video.contentURI" width="100%" height="200"></anguvideo>
+                </div>
+            </section>
+            <div class="col-md-12">
+                <div>{{video.title}}</div>
+                <div>by:&nbsp;{{video.by}}</div>
+                <div>Submitted:&nbsp;{{video.createdDate | date:'MM/dd/yyyy' }}</div>
+                <div>Chapters:&nbsp;{{video.chapters}}</div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>

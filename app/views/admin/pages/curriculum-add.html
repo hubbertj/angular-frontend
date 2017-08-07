@@ -1,0 +1,155 @@
+<section class="page hope-curriculums-add" ng-init="init()">
+    <div class="pageheader">
+        <h2 class="ng-binding">{{ 'Menu.ADD_CURRICULUM' | translate }}</h2>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li> <a><i class="fa fa-home"></i>{{ 'Menu.DASHBOARD' | translate }}</a> </li>
+                <li> <a>{{ 'Menu.CURRICULUM' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.manage">{{ 'Menu.MANAGE_CURRICULUMS' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.add">{{ 'Menu.ADD' | translate }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pagecontent">
+        <section class="tile" fullscreen="isFullscreen06">
+            <!-- tile header -->
+            <div class="tile-header dvd dvd-btm">
+                <h1 class="">{{ 'Menu.CURRICULUM_DETAILS' | translate }}</h1>
+                <ul class="controls">
+                    <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                        <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                        <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                            <li>
+                                <a href="" tile-control-toggle="">
+                                    <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                    <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" tile-control-fullscreen="" ng-click="isFullscreen06 = !isFullscreen06">
+                                    <i class="fa fa-expand" name="expand"></i> {{ 'Page.FULLSCREEN' | translate }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" tile-control-lightbox="">
+                                    <i class="fa fa-magnet" name="magnet"></i> {{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <uib-alert ng-repeat="alert in alerts track by $index" type="{{alert.type}}" close="closeAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+                <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+            </uib-alert>
+            <div class="tile-body">
+                <div class="row">
+                    <form name="addCurriculumForm" ng-submit="onSubmit()">
+                        <div class="form-group col-xs-12">
+                            <label class="col-xs-2 col-form-label text-right">{{ 'Page.ENTITY' | translate }}</label>
+                            <div class="col-xs-10">
+                                <select class="form-control" name="entityid" id="entity" ng-model="curriculum.entityId" ng-options="entity.name for entity in entities.all()" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label class="col-xs-2 col-form-label text-right">{{ 'Page.TITLE' | translate }}</label>
+                            <div class="col-xs-10">
+                                <language-support class="language-support" title="Title" var-class="form-control" var-model="curriculum.title" var-name="title" var-type="text" var-id="curriculum-title">
+                                </language-support>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label class="col-xs-2 col-form-label text-right">{{ 'Page.DESCRIPTION' | translate }}</label>
+                            <div class="col-xs-10">
+                                <language-support class="language-support" title="Description" var-class="form-control" language="curriculum.enabledLanguages" var-model="curriculum.description" var-name="description" var-type="text" var-id="curriculum-description">
+                                </language-support>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label class="col-xs-2 col-form-label text-right">{{ 'Page.ABBREV' | translate }}.</label>
+                            <div class="col-xs-3 ">
+                                <input class="form-control" ng-model="curriculum.abbreviationTitle" name="abbreviationTitle" type="text" id="curriculum-abbreviation-title" required>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="row form-inline">
+                                    <label class="col-xs-5 col-form-label">{{ 'Page.DELIVERY_FORMATS' | translate }}</label>
+                                    <div class="col-xs-7">
+                                        <div class="row">
+                                            <label class="checkbox checkbox-custom">
+                                                <input type="checkbox" ng-model="curriculum.isWeb" name="isWeb" id="curriculum-isWeb"><i></i> {{ 'Page.WEB' | translate }}
+                                            </label>
+                                            <label class="checkbox checkbox-custom">
+                                                <input type="checkbox" ng-model="curriculum.isIos" name="isIos" id="curriculum-isIos"><i></i> {{ 'Page.IOS' | translate }}
+                                            </label>
+                                            <label class="checkbox checkbox-custom">
+                                                <input type="checkbox" ng-model="curriculum.isAndroid" name="isAndroid" id="curriculum-isAndroid"><i></i> {{ 'Page.ANDROID' | translate }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label class="col-xs-2 col-form-label text-right">{{ 'Page.EST_TIME' | translate }}</label>
+                            <div class="col-xs-3">
+                                <input class="form-control" ng-model="curriculum.estimatedTime" name="time" type="number" id="curriculum-time" required>
+                            </div>
+                            <div class="visible-xs col-xs-12">&nbsp;</div>
+                            <div class="col-sm-7 col-xs-12">
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-3 col-form-label">{{ 'Page.LANGUAGES' | translate }}</label>
+                                    <div class="col-xs-9">
+                                        <input class="form-control" ng-model="curriculum.enabledLanguages" name="enabledLanguages" type="text" id="curriculum-languages" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <div class="form-inline col-xs-12">
+                                <label class="checkbox checkbox-custom pull-right">
+                                    <input type="checkbox" ng-model="curriculum.isEnabled" name="isEnabled" id="curriculum-isEnabled"><i></i> {{ 'Page.ENABLED' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <button class="md-raised md-primary md-button md-ink-ripple pull-right" ng-disabled="addCurriculumForm.$invalid">{{ 'Page.SAVE' | translate }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="tile" fullscreen="isFullscreen06">
+            <!-- tile header -->
+            <div class="tile-header dvd dvd-btm">
+                <h1 class="">{{ 'Menu.CERTIFICATE' | translate }}</h1>
+                <ul class="controls">
+                    <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                        <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                        <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                            <li>
+                                <a href="" tile-control-toggle="">
+                                    <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                    <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" tile-control-fullscreen="" ng-click="isFullscreen06 = !isFullscreen06">
+                                    <i class="fa fa-expand" name="expand"></i> {{ 'Page.FULLSCREEN' | translate }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" tile-control-lightbox="">
+                                    <i class="fa fa-magnet" name="magnet"></i> {{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="tile-body">
+                <div class="row"></div>
+            </div>
+        </section>
+    </div>
+</section>

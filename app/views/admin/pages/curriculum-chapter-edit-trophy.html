@@ -1,0 +1,55 @@
+<section class="page page-dashboard hope-manage-curriculums" ng-init="init">
+    <div class="pageheader">
+        <h2 class="ng-binding">{{ 'Menu.MANAGE_CURRICULUMS' | translate }}<span class="ng-binding"></span></h2>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li> <a><i class="fa fa-home"></i>{{ 'Menu.DASHBOARD' | translate }}</a> </li>
+                <li> <a>{{ 'Menu.CURRICULUM' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.manage">{{ 'Menu.MANAGE_CURRICULUMS' | translate }}</a> </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pagecontent">
+        <div class="row">
+            <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen03">
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="custom-font">{{ 'Page.CURRICULUMS' | translate }}</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+                                <a href uib-dropdown-toggle class="dropdown-toggle settings"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
+                                    <li>
+                                        <a href tile-control-toggle>
+                                            <span class="minimize"><fa name="angle-down"></fa>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><fa name="angle-up"></fa>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href tile-control-refresh ng-click="refreshTable()">
+                                            <fa name="refresh"></fa>&nbsp;{{ 'Page.REFRESH' | translate }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href tile-control-fullscreen ng-click="isFullscreen03 = !isFullscreen03">
+                                            <fa name="expand"></fa>&nbsp;{{ 'Page.FULLSCREEN' | translate }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href tile-control-lightbox>
+                                            <fa name="magnet"></fa>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="add"><a ui-sref="admin.curriculums.add" tile-control-add><i class="fa fa-plus"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="tile-body" ng-init="getTableData()">
+                        <table datatable="" dt-options="mcCtrl.dtOptions" dt-columns="mcCtrl.dtColumns" class="hope-data-table table table-custom"></table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

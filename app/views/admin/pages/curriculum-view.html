@@ -1,0 +1,231 @@
+<section class="page hope-curriculums-view" ng-init="init()" ng-cloak>
+    <div class="pageheader">
+        <h2 class="ng-binding">{{ pageTitle[currentLang] }}&nbsp;({{ curriculum.abbreviationTitle }})</h2>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li> <a><i class="fa fa-home"></i>{{ 'Menu.DASHBOARD' | translate }}</a> </li>
+                <li> <a>{{ 'Menu.CURRICULUM' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.manage">{{ 'Menu.MANAGE_CURRICULUMS' | translate }}</a> </li>
+                <li> <a ui-sref="admin.curriculums.view({curriculumId:{{ $stateParams.curriculumId }}})">{{ curriculum.abbreviationTitle }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pagecontent">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="{{alert.closeable ? 'closeable' : 'notcloseable'}}">
+            <i class="fa {{alert.icon}}"></i> {{alert.msg}}
+        </uib-alert>
+        <div class="row">
+            <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen06">
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="">{{ 'Page.CURRICULUM_STATISTICS' | translate }}</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                                <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                                    <li>
+                                        <a href="" tile-control-toggle="">
+                                            <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Menu.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Menu.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-fullscreen="" ng-click="isFullscreen06 = !isFullscreen06">
+                                            <i class="fa fa-expand" name="expand"></i> {{ 'Menu.FULLSCREEN' | translate }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-lightbox="">
+                                            <i class="fa fa-magnet" name="magnet"></i> {{ 'Menu.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="edit"><a href="https://www.localytics.com/" target="_blank" tile-control-edit><i class="fa fa-tasks"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="tile-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4 class="text-center"><strong>Total Users&nbsp;({{total_users | number : fractionSize}})</strong></h4>
+                                <div morris-line-chart line-data='basicData' line-xkey='year' line-ykeys='["a", "b"]' line-labels='["Series A", "Series B"]' line-colors='["#16a085","#FF0066"]' style="height: 250px"></div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <h4 class=""><strong>Users by Platform</strong></h4>
+                                <span sparkline data="pieChart.data" options="pieChart.options"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-md-12">
+                                    <div class="progress-list">
+                                        <div class="details">
+                                            <div class="title">CERTIFICATES&nbsp;EARNED&nbsp;({{certs_earned | number : fractionSize}})</div>
+                                            <div class="description">&nbsp;</div>
+                                        </div>
+                                        <div class="status pull-right">
+                                            <span>40</span>%
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <uib-progressbar class="progress-xs not-rounded" value="40" type="dutch"><b>40%</b></uib-progressbar>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <h4 class="" style="white-space: nowrap"><strong>Users by Gender</strong></h4>
+                                    <span sparkline data="genderPieChart.data" options="genderPieChart.options"></span>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <h4 class="" style="white-space: nowrap"><strong>Users by Age</strong></h4>
+                                    <span sparkline data="agePieChart.data" options="agePieChart.options"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-footer">&nbsp;</div>
+                </section>
+            </div>
+            <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen06">
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="">{{ 'Menu.CURRICULUM' | translate }}&nbsp;{{ 'Page.SETTINGS' | translate }}</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                                <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                                    <li>
+                                        <a href="" tile-control-toggle="">
+                                            <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-lightbox="">
+                                            <i class="fa fa-magnet" name="magnet"></i>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body">
+                        <div class="row">
+                            <form name="editCurriculumForm" ng-submit="onEdit()" validate>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-2 col-form-label">{{ 'Page.TITLE' | translate }}</label>
+                                    <div class="col-xs-10">
+                                        <language-support class="language-support" title="Title" var-class="form-control" var-model="curriculum.title" var-name="title" var-type="text" var-id="curriculum-title">
+                                        </language-support>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-2 col-form-label">{{ 'Page.ENABLED_LANGUAGES' | translate }}</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" ng-model="curriculum.enabledLanguages" name="enabledLanguages" type="text" id="curriculum-languages" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-2 col-form-label">{{ 'Page.SUPPORTED_LANGUAGES' | translate }}</label>
+                                    <div class="col-xs-10">
+                                        <select multiple class="form-control" ng-model="curriculum.supportedLanguages" name="supportedLanguages" id="curriculum-supported-languages">
+                                            <option ng-repeat="language in curriculum.enabledLanguages track by $index">{{language}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <button class="md-raised md-primary md-button md-ink-ripple pull-right" ng-disabled="editCurriculumForm.$invalid">{{ 'Page.UPDATE' | translate }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-12">
+                <section class="tile" fullscreen="isFullscreen06">
+                    <!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                        <h1 class="">{{ 'Menu.CURRICULUM' | translate }}&nbsp;{{ 'Page.PROMO_AREA' | translate }}&nbsp;({{ 'Page.HERO' | translate }})</h1>
+                        <ul class="controls">
+                            <li class="dropdown" uib-dropdown="" on-toggle="toggled(open)">
+                                <a href="" uib-dropdown-toggle="" class="dropdown-toggle settings" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp" style="">
+                                    <li>
+                                        <a href="" tile-control-toggle="">
+                                            <span class="minimize"><i class="fa fa-angle-down" name="angle-down"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.MINIMIZE' | translate }}</span>
+                                            <span class="expand"><i class="fa fa-angle-up" name="angle-up"></i>&nbsp;&nbsp;&nbsp;{{ 'Page.EXPAND' | translate }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-refresh="" ng-click="refreshCharts()">
+                                            <i class="fa fa-refresh" name="refresh"></i>&nbsp;{{ 'Page.REFRESH' | translate }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" tile-control-lightbox="">
+                                            <i class="fa fa-magnet" name="magnet"></i>&nbsp;{{ 'Page.OPEN_IN_LIGHTBOX' | translate }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="edit"><a ui-sref="admin.curriculums.editHero({curriculumId: {{$stateParams.curriculumId}}})" tile-control-edit><i class="fa fa-pencil"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="tile-body">
+                        <div class="row">
+                            <div class="col-xs-12 carousel-demo">
+                                <ul rn-carousel rn-carousel-index="carouselIndex2" rn-carousel-auto-slide rn-carousel-pause-on-hover rn-carousel-buffered class="carousel2">
+                                    <li ng-repeat="hero in heroImages track by hero.id" ng-class="'id-' + hero.id">
+                                        <div ng-style="{'background-image': 'url(' + hero.imageUrl + ')'}" class="bgimage"></div>
+                                    </li>
+                                </ul>
+                                <div class="custom-indicator" rn-carousel-indicators ng-if="heroImages.length > 1" slides="heroImages" rn-carousel-index="carouselIndex2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xs-12 content-section">
+                <h4 class="underline hope-section-header">
+                    <div class="row">
+                        <span class="col-md-4 section-title">{{ 'Page.CHAPTERS' | translate }}({{chapters.length}})&nbsp;&amp;&nbsp;{{ 'Page.LESSONS' | translate }}({{lessonCount}})</span>
+                        <div class="col-md-4 pull-right"><a type="button" ui-sref="admin.curriculums.addChapter({curriculumId:{{$stateParams.curriculumId}}})" class="md-raised md-primary md-button md-ink-ripple pull-right">&#43;&nbsp;{{ 'Menu.ADD_CHAPTER' | translate }}</a></div>
+                    </div> 
+                </h4>
+            </div>
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 chapter-section" ng-repeat="chapter in chapters.all() track by $index">
+                        <section class="tile">
+                            <div class="tile-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <img ng-if="chapter.headerImageURI" class="chapter-img" ng-src="{{chapter.headerImageURI}}" alt="CHAPTER" />
+                                        <img ng-if="!chapter.headerImageURI" class="chapter-img" src="images/defaults/cover_default.jpg" alt="CHAPTER" />
+                                    </div>
+                                    <div class="col-xs-12"><b>{{chapter.title[currentLang]}}</b></div>
+                                    <small class="description col-xs-12">{{chapter.description[currentLang]}}</small>
+                                    <div class="col-xs-12">&nbsp;</div>
+                                    <small class="col-xs-12">{{ 'Page.TIME_NEEDED' | translate }}:&nbsp;<span>{{chapter.estimatedTime}}</span></small>
+                                    <small class="col-xs-12">{{ 'Page.INTRO_VIDEO' | translate }}:
+                                        <span ng-if="chapter.intro_video != null && chapter.intro_video">yes</span>
+                                        <span ng-if="chapter.intro_video == null || !chapter.intro_video">no</span>
+                                    </small>
+                                    <small class="col-xs-12">{{ 'Page.LESSONS' | translate }}:&nbsp;<span>{{chapter.lessonCount}}</span></small>
+                                    <small class="col-xs-12">{{ 'Page.ACTIVITIES' | translate }}:&nbsp;<span>{{chapter.activityCount}}</span></small>
+                                    <small class="col-xs-12">{{ 'Page.STATUS' | translate }}:&nbsp;<span>{{chapter.isEnabled | active}}</span></small>
+                                    <div class="col-xs-12">&nbsp;</div>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-2">&nbsp;</div>
+                                        <div class="col-xs-8">
+                                            <a class="md-raised md-primary md-button md-ink-ripple" ui-sref="admin.curriculums.editChapter({curriculumId:{{ $stateParams.curriculumId }}, chapterId: {{chapter.id}} })">{{ 'Page.EDIT' | translate }}</a>
+                                        </div>
+                                        <div class="col-xs-2">&nbsp;</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

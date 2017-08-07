@@ -1,0 +1,30 @@
+// Common general css for pages
+@import "tools";
+.remove-before:before {
+    content: "" !important;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.video-tabset {
+    .nav-tabs > li.active:after {
+        content: none !important;
+    }
+}
+
+.file-manager-container {
+    max-height: $file-manager-container-height;
+    overflow-y: auto;
+}
+
+table.hope-data-table {
+    width: 100% !important;
+}
+
+.quick-border{
+	border: 1px solid #F0F8FF;
+	background-color: #F0F8FF;
+}
+

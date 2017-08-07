@@ -1,0 +1,24 @@
+.hope-modal {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: 180px;
+    .modal-content {
+        border-radius: 20px;
+    }
+}
+
+//Used for modals so they can be in front of modal background.
+#content{
+	z-index: auto !important;
+}
+
+.languageModalContent{
+	.modal-footer{
+		background-color: white;
+    	border: none;
+	}
+}
+
+    

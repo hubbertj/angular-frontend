@@ -1,0 +1,41 @@
+<script type="text/ng-template" id="defaultModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title custom-font">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a ng-click="selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success btn-ef btn-ef-3 btn-ef-3c" ng-click="ok()"><i class="fa fa-arrow-right"></i> Submit</button>
+        <button class="btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" ng-click="cancel()"><i class="fa fa-arrow-left"></i> Cancel</button>
+    </div>
+</script>
+<script type="text/ng-template" id="languageModalContent.html">
+    <div class="modal-wrapper languageModalContent">
+        <div class="modal-header custom-font">
+        <h3 class="modal-title custom-font">Edit&nbsp;{{title}}</h3>
+        </div>
+        <form name="languageModalForm" ng-submit="onSubmit()" ng-init="init()" validate>
+            <div class="modal-body">
+                <ng-form name="userFieldForm" ng-repeat="language in languages track by $index">
+                    <div class="form-group">
+                        <label class="col-xs-2 col-form-label text-right">{{language | uppercase}}</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" name="lan" ng-model="languageStr[language]" required/>
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                </ng-form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-ef btn-ef-3 btn-ef-3c"><i class="fa fa-arrow-right"></i> Submit</button>
+                <button class="btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" ng-click="cancel()" type="button"><i class="fa fa-arrow-left"></i> Cancel</button>
+            </div>
+        </form>
+    </div>
+</script>

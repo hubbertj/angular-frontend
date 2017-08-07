@@ -1,0 +1,228 @@
+<header class="clearfix" ng-init="initHeader()">
+    <!-- Branding -->
+    <div class="branding {{main.settings.brandingColor}}" id="hope-branding">
+        <a class="brand" ui-sref="admin.curriculums">
+            <span><strong>Operation Hope</strong></span>
+        </a>
+        <a href="javascript:;" class="offcanvas-toggle visible-xs-inline" offcanvas-sidebar><i class="fa fa-bars"></i></a>
+    </div>
+    <!-- Branding end -->
+    <!-- Left-side navigation -->
+    <ul class="nav-left pull-left list-unstyled list-inline">
+        <li class="sidebar-collapse divided-right">
+            <a href="javascript:;" collapse-sidebar>
+                <fa name="outdent"></fa>
+            </a>
+        </li>
+        <li class="dropdown divided-right settings" uib-dropdown>
+            <a href class="dropdown-toggle" uib-dropdown-toggle>
+                <fa name="cog"></fa>
+            </a>
+            <ul class="dropdown-menu with-arrow animated littleFadeInUp" role="menu">
+                <li>
+                    <ul class="color-schemes list-inline">
+                        <li class="title">Header Color:</li>
+                        <li>
+                            <a href="javascript:;" class="scheme-drank" ng-click="main.settings.navbarHeaderColor='scheme-default'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-black" ng-click="main.settings.navbarHeaderColor='scheme-black'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-greensea" ng-click="main.settings.navbarHeaderColor='scheme-greensea'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-cyan" ng-click="main.settings.navbarHeaderColor='scheme-cyan'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-lightred" ng-click="main.settings.navbarHeaderColor='scheme-lightred'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-light" ng-click="main.settings.navbarHeaderColor='scheme-light'; $event.stopPropagation()"></a>
+                        </li>
+                        <li class="title">Branding Color:</li>
+                        <li>
+                            <a href="javascript:;" class="scheme-drank" ng-click="main.settings.brandingColor='scheme-default'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-black" ng-click="main.settings.brandingColor='scheme-black'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-greensea" ng-click="main.settings.brandingColor='scheme-greensea'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-cyan" ng-click="main.settings.brandingColor='scheme-cyan'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-lightred" ng-click="main.settings.brandingColor='scheme-lightred'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-light" ng-click="main.settings.brandingColor='scheme-light'; $event.stopPropagation()"></a>
+                        </li>
+                        <li class="title">Sidebar Color:</li>
+                        <li>
+                            <a href="javascript:;" class="scheme-drank" ng-click="main.settings.sidebarColor='scheme-default'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-black" ng-click="main.settings.sidebarColor='scheme-black'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-greensea" ng-click="main.settings.sidebarColor='scheme-greensea'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-cyan" ng-click="main.settings.sidebarColor='scheme-cyan'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-lightred" ng-click="main.settings.sidebarColor='scheme-lightred'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-light" ng-click="main.settings.sidebarColor='scheme-light'; $event.stopPropagation()"></a>
+                        </li>
+                        <li class="title">Active Color:</li>
+                        <li>
+                            <a href="javascript:;" class="scheme-drank" ng-click="main.settings.activeColor='drank-scheme-color'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-black" ng-click="main.settings.activeColor='black-scheme-color'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-greensea" ng-click="main.settings.activeColor='default-scheme-color'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-cyan" ng-click="main.settings.activeColor='cyan-scheme-color'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-lightred" ng-click="main.settings.activeColor='lightred-scheme-color'; $event.stopPropagation()"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="scheme-light" ng-click="main.settings.activeColor='light-scheme-color'; $event.stopPropagation()"></a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="form-group ng-scope">
+                        <div class="row">
+                            <label class="col-xs-8 control-label">Fixed header</label>
+                            <div class="col-xs-4 control-label">
+                                <div class="onoffswitch lightred small" ng-click="$event.stopPropagation()">
+                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="fixed-header" checked="" ng-model="main.settings.headerFixed">
+                                    <label class="onoffswitch-label" for="fixed-header">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group ng-scope">
+                        <div class="row">
+                            <label class="col-xs-8 control-label">Fixed aside</label>
+                            <div class="col-xs-4 control-label">
+                                <div class="onoffswitch lightred small" ng-click="$event.stopPropagation()">
+                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="fixed-aside" checked="" ng-model="main.settings.asideFixed">
+                                    <label class="onoffswitch-label" for="fixed-aside">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- Left-side navigation end -->
+    <!-- Search -->
+    <!-- <div class="search" id="main-search">
+        <input type="text" class="form-control underline-input" placeholder="Search...">
+    </div> -->
+    <!-- Search end -->
+    <!-- Right-side navigation -->
+    <ul class="nav-right pull-right list-inline">
+       <!--  <li class="dropdown notifications" uib-dropdown>
+            <a href class="dropdown-toggle" uib-dropdown-toggle>
+                <fa name="bell"></fa>
+                <span class="badge bg-lightred">{{message.alerts.length}}</span>
+            </a>
+            <div class="dropdown-menu pull-right with-arrow panel panel-default animated littleFadeInLeft" role="menu">
+                <div class="panel-heading">
+                    You have <strong>{{messageAlerts.length}}</strong> notifications
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="alert in messageAlerts track by $index">
+                        <a href="javascript:;" class="media">
+                            <div class="media-left">
+                                <span class="media-object media-icon bg-danger"><fa name="ban"></fa></span>
+                            </div>
+                            <div class="media-body">
+                                <span class="block">User Imrich cancelled account</span>
+                                <small class="text-muted">6 minutes ago</small>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="panel-footer">
+                    <a href="javascript:;">Show all notifications <fa name="angle-right" class="pull-right"></fa></a>
+                </div>
+            </div>
+        </li> -->
+        <li class="dropdown nav-profile" uib-dropdown>
+            <a href class="dropdown-toggle" uib-dropdown-toggle>
+                <img src="images/defaults/profile-default.gif" class="img-circle size-30x30" alt="" />
+                <span>{{user.firstName}} {{user.lastName}}<fa name="angle-down"></fa></span>
+            </a>
+            <ul class="dropdown-menu animated littleFadeInRight" role="menu">
+                <li>
+                    <a ui-sref="admin.users.editUser({userId: user.id})">
+                        <fa name="cog"></fa>{{ 'Menu.PROFILE' | translate }}
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a ui-sref="logout">
+                        <fa name="sign-out"></fa>{{ 'Menu.LOGOUT' | translate }}
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown language" uib-dropdown>
+            <a href class="dropdown-toggle" uib-dropdown-toggle>
+                <img ng-show="currentLanguage == 'en'" src="images/flags/United-States-of-America.png" alt="">
+                <!-- <img ng-show="currentLanguage == 'es'" src="images/flags/Slovakia.png" alt="">
+                <img ng-show="currentLanguage == 'cz'" src="images/flags/Czech-Republic.png" alt="">
+                <img ng-show="currentLanguage == 'de'" src="images/flags/Germany.png" alt=""> -->
+            </a>
+            <ul class="dropdown-menu pull-right with-arrow animated littleFadeInDown" role="menu">
+                <li ng-class="{active: currentLanguage == 'en'}">
+                    <a href="javascript:;" ng-click="changeLanguage('en')">
+                        <img src="images/flags/United-States-of-America.png" alt=""> English
+                    </a>
+                </li>
+                <!-- <li ng-class="{active: currentLanguage == 'es'}">
+                    <a href="javascript:;" ng-click="changeLanguage('es')">
+                        <img src="images/flags/Slovakia.png" alt=""> Spanish
+                    </a>
+                </li>
+                <li ng-class="{active: currentLanguage == 'cz'}">
+                    <a href="javascript:;" ng-click="changeLanguage('cz')">
+                        <img src="images/flags/Czech-Republic.png" alt=""> Czech
+                    </a>
+                </li>
+                <li ng-class="{active: currentLanguage == 'de'}">
+                    <a href="javascript:;" ng-click="changeLanguage('de')">
+                        <img src="images/flags/Germany.png" alt=""> German
+                    </a>
+                </li> -->
+            </ul>
+        </li>
+        <!-- <li class="toggle-right-sidebar">
+            <a href="javascript:;" ng-click="main.settings.rightbarShow = !main.settings.rightbarShow">
+                <fa name="comments"></fa>
+            </a>
+        </li> -->
+    </ul>
+    <!-- Right-side navigation end -->
+</header>
